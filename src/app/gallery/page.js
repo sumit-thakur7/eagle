@@ -1,10 +1,10 @@
-import BlogContainer from '@/container/BlogContainer'
+import GalleryContainer from '@/container/GalleryContainer'
 import React from 'react'
 
 const page = () => {
   return (
     <>
-    <BlogContainer/>
+        <GalleryContainer/>
     </>
   )
 }

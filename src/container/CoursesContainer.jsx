@@ -1,10 +1,18 @@
-import ParaglidingCourses from "@/components/couesesComponents/ParaglidingCourses";
+import Footer from "@/components/Common/Footer";
+import Navbar from "@/components/Common/Navbar";
 
-export default function CoursesContainer (){
+import CoursesBanner from "@/components/coursesComponents/CoursesBanner";
+import ParaglidingCourses from "@/components/coursesComponents/ParaglidingCourses";
+
+export default function CoursesContainer() {
   return (
     <>
-   <ParaglidingCourses/>
+      <Navbar />
+
+      <CoursesBanner />
+      <ParaglidingCourses />
+      <Footer />
     </>
-    
+
   )
 }

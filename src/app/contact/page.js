@@ -1,10 +1,10 @@
-import BlogContainer from '@/container/BlogContainer'
+import ContactContainer from '@/container/ContactContainer'
 import React from 'react'
 
 const page = () => {
   return (
     <>
-    <BlogContainer/>
+    <ContactContainer/>
     </>
   )
 }
