@@ -1,11 +1,10 @@
 'use client';
-
-import { useState } from 'react';
-import { FaBars, FaTimes, FaParachuteBox } from 'react-icons/fa';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { Plane } from 'lucide-react';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -19,70 +18,123 @@ export default function Navbar() {
     { name: 'Contact', path: '/contact' },
   ];
 
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-gradient-to-r from-gray-400 to-gray-300 px-4 py-3 shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-gray-100/90 backdrop-blur-md shadow-sm py-2"
+          : "bg-transparent py-4"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/home" className="flex items-center gap-2">
-          <FaParachuteBox className="text-yellow-500 text-2xl" />
-          <span className="font-bold text-xl text-gray-900">
+        <a href="/" className="flex items-center gap-2">
+          <Plane className="text-yellow-500 w-8 h-8" />
+          <span className="font-bold text-2xl text-gray-900">
             GEP <span className="text-yellow-500">Paragliding</span>
           </span>
-        </Link>
+        </a>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-6 items-center text-sm font-medium text-gray-800">
-          {navLinks.map((link, index) => (
-            <li key={index} className="relative group cursor-pointer">
-              <Link
+          {navLinks.map((link) => (
+            <li key={link.name} className="relative group cursor-pointer">
+              <a
                 href={link.path}
                 className={`${
-                  link.name === 'Home'
-                    ? 'text-yellow-500'
-                    : 'hover:text-yellow-500'
-                }`}
+                  link.path === "/"
+                    ? "text-yellow-500"
+                    : "hover:text-yellow-500"
+                } transition-colors`}
               >
                 {link.name}
-              </Link>
-              {link.name === 'Home' && (
-                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-yellow-500"></span>
+              </a>
+              {link.path === "/" && (
+                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-yellow-500 transition-all duration-300"></span>
               )}
             </li>
           ))}
         </ul>
 
-        {/* Book Now Button */}
-        <Link
+        {/* Book Now Button (Desktop) */}
+        <a
           href="/book"
-          className="hidden md:inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-5 py-2 rounded-full transition"
+          className="hidden md:inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-full transition"
         >
           Book Now
-        </Link>
+        </a>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setOpen(!open)}>
-          {open ? <FaTimes size={22} /> : <FaBars size={22} />}
+        <button className="md:hidden text-gray-800" onClick={() => setOpen(!open)}>
+          {open ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          )}
         </button>
       </div>
 
       {/* Mobile Navigation */}
       {open && (
-        <ul className="md:hidden mt-4 space-y-2 text-gray-800 font-medium">
-          {navLinks.map((link, index) => (
-            <li key={index} className="py-1 px-2 hover:text-yellow-500">
-              <Link href={link.path} onClick={() => setOpen(false)}>
+        <ul className="md:hidden mt-4 space-y-2 text-gray-800 font-medium bg-gray-100 px-4 py-3">
+          {navLinks.map((link) => (
+            <li
+              key={link.name}
+              className="py-2 px-2 hover:text-yellow-500 transition-colors"
+            >
+              <a href={link.path} onClick={() => setOpen(false)}>
                 {link.name}
-              </Link>
+              </a>
             </li>
           ))}
           <li>
-            <Link
+            <a
               href="/book"
-              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-full transition"
+              className="w-full block text-center bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-full transition"
               onClick={() => setOpen(false)}
             >
               Book Now
-            </Link>
+            </a>
           </li>
         </ul>
       )}
