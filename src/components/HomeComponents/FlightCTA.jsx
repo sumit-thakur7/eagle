@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // components/FlightCTA.jsx
 export default function FlightCTA() {
   return (
@@ -12,13 +14,21 @@ export default function FlightCTA() {
         Book your adventure today and create memories that will last a lifetime.
       </p>
       <div className="flex justify-center gap-4">
-        <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 px-6 rounded-full transition">
+        <Link
+          href="/booking"
+          className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 px-6 rounded-full transition"
+        >
           Book Your Flight
-        </button>
-        <button className="border border-white hover:bg-white hover:text-gray-800 text-white font-semibold py-3 px-6 rounded-full transition">
+        </Link>
+
+        <Link
+          href="/contact"
+          className="border border-white hover:bg-white hover:text-gray-800 text-white font-semibold py-3 px-6 rounded-full transition"
+        >
           Contact Us
-        </button>
+        </Link>
       </div>
+
     </div>
   );
 }

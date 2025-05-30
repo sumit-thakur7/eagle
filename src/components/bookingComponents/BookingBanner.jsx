@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function BookingBanner() {
   return (
     <div className="relative bg-gradient-to-r from-gray-500 to-gray-300 py-24 text-center">
-      <h1 className="text-white text-4xl font-extrabold mb-4">About Us</h1>
+      <h1 className="text-white text-4xl font-extrabold mb-4">booking </h1>
       <p className="text-white max-w-3xl mx-auto text-lg px-4">
         Learn about our journey, mission, and passion for bringing the experience of paragliding to adventure enthusiasts around the world.
       </p>

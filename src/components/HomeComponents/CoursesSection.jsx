@@ -1,5 +1,5 @@
 import Image from 'next/image';
-
+import Link from 'next/link';
 const courses = [
   {
     title: 'Tandem Flight Experience',
@@ -62,11 +62,10 @@ export default function CoursesSection() {
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-semibold text-lg">{course.title}</h3>
                   <span
-                    className={`text-xs font-medium px-2 py-1 rounded-full ${
-                      course.level === 'Beginner'
+                    className={`text-xs font-medium px-2 py-1 rounded-full ${course.level === 'Beginner'
                         ? 'bg-yellow-100 text-yellow-700'
                         : 'bg-green-100 text-green-700'
-                    }`}
+                      }`}
                   >
                     {course.level}
                   </span>
@@ -80,9 +79,11 @@ export default function CoursesSection() {
 
         {/* CTA Button */}
         <div className="text-center mt-10">
-          <button className="px-6 py-2 border border-black rounded-full hover:bg-black hover:text-white transition">
-            View All Courses →
-          </button>
+          <Link href="/courses">
+            <button className="px-6 py-2 border border-black rounded-full hover:bg-black hover:text-white transition">
+              View All Courses →
+            </button>
+          </Link>
         </div>
       </div>
     </section>

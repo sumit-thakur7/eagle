@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { FaCheckCircle, FaMountain, FaClock, FaUserFriends } from 'react-icons/fa';
 
 export default function HeroSection() {
@@ -20,12 +21,21 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="mt-6 flex flex-wrap gap-4">
-              <button className="bg-yellow-400 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-yellow-500 transition">
-                Book Your Flight
-              </button>
-              <button className="border border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-800 transition">
+              <Link
+                href="/booking"
+                className="px-8 py-3 bg-yellow-400 text-white font-accent font-medium rounded-full hover:bg-secondary/90 transition text-center relative overflow-hidden group"
+              >
+                <span className="relative z-10">Book Your Flight</span>
+                <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></span>
+              </Link>
+
+              <Link
+                href="/courses"
+                className="px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-accent font-medium rounded-full hover:bg-white/20 transition text-center"
+              >
                 Explore Courses
-              </button>
+              </Link>
+
             </div>
           </div>
 
